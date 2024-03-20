@@ -1,2 +1,8 @@
-﻿  MaxStream.cpp
+﻿  Graph.cpp
+C:\Users\liber\source\repos\MaxStream\MaxStream\Graph.h(40,18): warning C4101: randTo: неиспользованная локальная переменная
+C:\Users\liber\source\repos\MaxStream\MaxStream\Graph.h(40,7): warning C4101: randEdges: неиспользованная локальная переменная
+  MaxStream.cpp
+C:\Users\liber\source\repos\MaxStream\MaxStream\Graph.h(40,18): warning C4101: randTo: неиспользованная локальная переменная
+C:\Users\liber\source\repos\MaxStream\MaxStream\Graph.h(40,7): warning C4101: randEdges: неиспользованная локальная переменная
+  Создание кода...
   MaxStream.vcxproj -> C:\Users\liber\source\repos\MaxStream\x64\Debug\MaxStream.exe

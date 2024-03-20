@@ -13,7 +13,7 @@ auto GetWaysFrom(Graph& Net, int tempActive, std::string tempStr,
 {
     std::list< std::pair< int, std::string > > WaysFrom;
     current = 0; tempStr = ""; tempActive = 0;
-    for (int i = 0; i < Net.Edges.size(); i++) { // from i to D-1
+    for (int i = 0; i < Net.Edges.size(); i++) {
         for (Pair pair : Net.Edges[i]) {
 
             if (current != i) {
@@ -76,6 +76,7 @@ void MakeLpSolve(Graph& Net)
     std::list<std::pair<std::string, int>> Dx;
     std::list<std::pair<std::string, int>> Xx;
 
+    // "Последний" узел сети.
     int D = Net.Edges[Net.Edges.size() - 1][0].first;
 
 
@@ -116,6 +117,7 @@ void MakeLpSolve(Graph& Net)
     // Пути в  i
     std::list<std::pair<int, std::string >> WaysTo = GetWaysTo(Net, tempActive, tempStr, current);
     
+
 
     // Печатаем пути из S 
     strMax += "Max: " + WaysFrom.front().second +";";
@@ -179,16 +181,42 @@ void MakeLpSolve(Graph& Net)
 
 int main()
 {
-    // Записываем все пути и их велечины
-    std::vector<Edge> edges = {
-        {0, 1, 16}, {0, 2, 14}, {0, 3, 16}, {1, 3, 15}, {2, 3, 16}, {2, 4, 15}, {3, 4, 10}, {4, 5, 8}, {3, 5, 10}, {4, 6, 10}, {5, 6, 5}, {3, 6, 10}, {6, 7, 20}
-         };
 
-    // Создаём Сеть (взвешенный ориентарованный граф)
-    Graph* exampleGrapth =  new Graph(edges, 7);
+    std::setlocale(LC_ALL, "rus");
+
+    Graph* randGrapth = new Graph(10);
+    std::cout << "Введите размер сети \n";
+    int size;
+    std::cin >> size;
+    randGrapth->RandomCompletion(size);
+
+    std::cout << "Рёбра данной сети и их вес: \n";
+    for (int i = 0; i < (*randGrapth).Edges.size(); i++) {
+        for (Pair pair : (*randGrapth).Edges[i]) {
+            std::cout << "{" + std::to_string(i) + ", " + std::to_string(pair.first) + ", " + std::to_string(pair.second) + "}";
+        }
+
+
+    }
+    std::cout << "\nХотите сделать lp файл данной сети?";
+    std::cout << "\n Ожидание ввода: (1 - да , 2 - нет)";
+    int choice;
+    std::cin >> choice;
+
+    switch (choice)
+    {
+    case 1:
+        MakeLpSolve(*randGrapth);
+        std::cout << "Файл готов. Расположение: корневая папка проекта.";
+    case 2:
+        return 0;
+    default:
+        break;
+    }
+
 
     // Сделать LP файл данной сети, содержащий решение задачи нахождения максимального потока
-    MakeLpSolve(*exampleGrapth);
+    
 
     
 }
